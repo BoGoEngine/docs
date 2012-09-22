@@ -35,6 +35,7 @@ Tài liệu phát triển của IBus BoGoEngine được ghi trong file API.html
  - Thư viện gtkmm dành cho nhà phát triển (libgtkmm-dev >= 2.4)
  - Thư viện ibus dành cho nhà phát triển (libibus-1.0-dev, libibus-qt-dev, python-ibus)
  - python: trình biên dịch python (python-2.7.3)
+ - gir1.2-ibus
  
  _Lưu ý_:
  
