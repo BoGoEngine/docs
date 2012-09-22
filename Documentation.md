@@ -13,7 +13,7 @@ việc có một bộ gõ tiếng Việt hoàn chỉnh và tuân theo các tiêu
  * Mã nguồn không được có quy tắc (convention), chú thích, không có tài liệu (documentation) cho người phát triển. Đây là một điều rất xấu trong cộng đồng FOSS, 
  khi mà sự kế thừa và và phát triển được đề cao và được xem là sự sống còn cho phần mềm.
  
-IBus BoGoEngine được tạo ra để khắc phục các nhược điểm trên. Việc khắc phục lỗi preeedit string được coi là tính năng quan đáng chú ý của IBus BoGoEngine.
+IBus BoGoEngine được tạo ra để khắc phục các nhược điểm trên. Việc khắc phục lỗi preeedit string được coi là tính năng đáng chú ý của IBus BoGoEngine.
 Ngoài ra, nhóm phát triển còn muốn tạo ra một phần mềm theo đúng tinh thần FOSS bằng cách cung cấp documentation, viết code cẩn thận, có quy tắc và chú thích, 
 phân phối sử dưới giấy phép GNU GPL version 3. Nhóm phát triển hi vọng rằng, phần mềm này luôn được hoàn thiện.
  
