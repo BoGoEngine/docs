@@ -65,6 +65,8 @@ Tải mã nguồn của phần mềm về, giải nén ra thư mục BoGoEngine.
   Tại thư mục BoGoEngine thực hiện lệnh sau:
 
     cd bogo
+    git submodule init
+    git submodule update
     mkdir build
     cd build
     cmake ..

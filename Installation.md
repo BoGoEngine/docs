@@ -38,9 +38,9 @@ Sử dụng lệnh:
   Tại thư mục BoGoEngine thực hiện lệnh sau:
 
     cd bogo
-    mkdir build
     git submodule init
     git submodule update
+    mkdir build
     cd build
     cmake ..
     make
