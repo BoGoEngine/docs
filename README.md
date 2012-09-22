@@ -3,7 +3,7 @@
 ## 1. Hoàn cảnh ra đời dự án: ##
 
 Trong hoàn cảnh phần mềm tự do nguồn mở (FOSS) đang phát triển mạnh và tạo nên 
-những giá trị mới về kinh tế, an ninh và giáo dục của Việt Nam. Việc có một 
+những giá trị mới về kinh tế, an ninh và giáo dục của Việt Nam thì việc có một 
 bộ gõ tiếng Việt hoàn chỉnh và tuân theo các tiêu chuẩn và triết lý của FOSS
 là vô cùng cần thiết. Phần mềm ibus-unikey của tác giả Lê Quốc Tuấn (mr.lequoctuan@gmail.com)
 và Lê Kiến Trúc (afterlastangel@ubuntu-vn.org) đã đáp ứng khá tốt về tính năng
