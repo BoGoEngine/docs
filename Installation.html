@@ -1,0 +1,87 @@
+<h1>Tài liệu hướng dẫn cài đặt ibus-bogo</h1>
+
+<h2>Tải mã nguồn từ git</h2>
+
+<ul>
+<li>Yêu cầu: git</li>
+<li>Sử dụng lệnh sau để tải mã nguồn dự án:
+git clone git://github.com/haqduong/ibus-bogo.git</li>
+</ul>
+
+<h2>Biên dịch và cài đặt</h2>
+
+<p><em>* Yêu cầu để biên dịch *</em></p>
+
+<ul>
+<li>cmake: Công cụ tạo Makefiles (cmake >= 2.6)</li>
+<li>gcc: trình biên dịch C/C++ của GNU (gcc)</li>
+<li>Thư viện gtkmm dành cho nhà phát triển (libgtkmm-dev >= 2.4)</li>
+<li>Thư viện ibus dành cho nhà phát triển (libibus-1.0-dev, libibus-qt-dev, python-ibus)</li>
+<li>python: trình biên dịch python (python-2.7.3)</li>
+</ul>
+
+<p><em>* Yêu cầu để sử dụng *</em></p>
+
+<ul>
+<li>ibus >= 1.4</li>
+<li>ibus-qt</li>
+<li>gir1.2-ibus1.0 (tên package trong Ubuntu)</li>
+</ul>
+
+<p><em>Lưu ý</em>:</p>
+
+<ul>
+<li>Tên thư viện có thể khác nhau tùy theo bản phân phối linux.</li>
+<li>Nên sử dụng các bản phân phối linux mới nhất.</li>
+</ul>
+
+<h3>Cách 1: sử dụng script tự động hóa ở thư mục gốc của dự án</h3>
+
+<p>Sử dụng lệnh:
+    chmod u+x easy-install.sh
+    ./easy-install.sh</p>
+
+<h3>Cách 2: biên dịch thủ công</h3>
+
+<h4>Biên dịch BoGoEngine:</h4>
+
+<p>Tại thư mục BoGoEngine thực hiện lệnh sau:</p>
+
+<pre><code>cd bogo
+mkdir build
+git submodule init
+git submodule update
+cd build
+cmake ..
+make
+sudo make install
+</code></pre>
+
+<h4>Biên dịch engine cho IBus:</h4>
+
+<p>Tại thư mục BoGoEngine thực hiện lệnh sau:</p>
+
+<pre><code>cd ibus-bogo-python/
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+</code></pre>
+
+<h4>Chạy IBus BoGoEngine để test hoặc sử dụng luôn:</h4>
+
+<p>Tại thư mục BoGoEngine thực hiện lệnh sau:</p>
+
+<pre><code>ibus-daemon -xdr
+python ibus-bogo-python/engine/BoGoMain.py
+</code></pre>
+
+<h2>Thiết lập môi trường để sử dụng và phát triển</h2>
+
+<p>Sau khi cài đặt các gói trên, thêm các dòng sau vào file $HOME/.profile:</p>
+
+<pre><code>export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=xim
+</code></pre>
