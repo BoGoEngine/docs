@@ -1,102 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC
-    "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
-    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
-<html xml:lang='en' xmlns='http://www.w3.org/1999/xhtml' xmlns:svg='http://www.w3.org/2000/svg'>
-<head><meta content='application/xhtml+xml;charset=utf-8' http-equiv='Content-type' /><title>Tài liệu dự án IBus BoGoEngine</title></head>
-<body>
-<h1 id='ti_liu_d_n_ibus_bogoengine'>Tài liệu dự án IBus BoGoEngine</h1>
+<h1>Tài liệu phát triển IBus BoGoEngine</h1>
 
-<h2 id='1_hon_cnh_ra_i_d_n'>1. Hoàn cảnh ra đời dự án:</h2>
+<h2>Giới thiệu chung:</h2>
 
-<p>Trong hoàn cảnh phần mềm tự do nguồn mở (FOSS) đang phát triển mạnh và tạo nên những giá trị mới về kinh tế, an ninh và giáo dục của Việt Nam, việc có một bộ gõ tiếng Việt hoàn chỉnh và tuân theo các tiêu chuẩn và triết lý của FOSS là vô cùng cần thiết. Phần mềm ibus-unikey của tác giả Lê Quốc Tuấn (mr.lequoctuan@gmail.com) và Lê Kiến Trúc (afterlastangel@ubuntu-vn.org) đã đáp ứng khá tốt về tính năng sử dụng của người dùng FOSS Việt. Tuy vậy phần mềm này gặp phải một số vấn đề về kĩ thuật cũng như triết lý phần mềm tự do nguồn mở:</p>
+<p>Phần quan trọng nhất của của IBus BoGoEngine (gọi tắt là engine) là class Engine tại file <strong>BoGoEngine.py</strong>. 
+Class engine là kế thừa của class IBus.Engine được thiết kế bởi nhà phát triển IBus.
+Nhiệm vụ của người phát triển engine cho IBus là triển khai các phương thức (method) 
+của class IBus.Engine và đưa thêm các thành phần thuộc tính (property)
+và phương thức mới nhằm tạo ra các chức năng cần thiết. 
+Dưới đây là các phương thức và thuộc tính của class Engine trong IBusBoGoEngine.</p>
 
-<ul>
-<li>
-<p>Sử dụng kĩ thuật preeedit gây ra các phiền phức cho người dùng như: xuất hiện gạch chân khi gõ tiếng Việt, hiển thị kí tự khi gõ mật khẩu khi gõ ở terminal và đặc biệt nhảy kí tự cần gõ khi di duyển giữa các cửa sổ đang sử dụng ibus-unikey</p>
-</li>
+<h2>Một số khái niệm:</h2>
 
-<li>
-<p>Mã nguồn không được có quy tắc (convention), chú thích, không có tài liệu (documentation) cho người phát triển. Đây là một điều rất xấu trong cộng đồng FOSS, khi mà sự kế thừa và và phát triển được đề cao và được xem là sự sống còn cho phần mềm.</p>
-</li>
-</ul>
+<p><em>client</em>: cửa sổ tại đó IBus xử lý kí tự.</p>
 
-<p>IBus BoGoEngine được tạo ra để khắc phục các nhược điểm trên. Việc khắc phục lỗi preeedit string được coi là tính năng quan đáng chú ý của IBus BoGoEngine. Ngoài ra, nhóm phát triển còn muốn tạo ra một phần mềm theo đúng tinh thần FOSS bằng cách cung cấp documentation, viết code cẩn thận, có quy tắc và chú thích, phân phối sử dưới giấy phép GNU GPL version 3. Nhóm phát triển hi vọng rằng, phần mềm này luôn được hoàn thiện.</p>
+<p><em>engine</em>: engine xử lý kí tự của IBus</p>
 
-<h2 id='2_thit_k_ca_ibus_bogoengine'>2. Thiết kế của IBus BoGoEngine:</h2>
+<p><em>BoGoEngine</em>: engine xử lý tiếng Việt được sử dụng. Engine này được viết bằng C++ và cung cấp các hàm để gọi từ Python.</p>
 
-<p>IBus BoGoEngine gồm 2 thành phần:</p>
+<h2>Class Engine(IBus.Engine)</h2>
+
+<h3>Instance Variables:</h3>
 
 <ul>
-<li>BoGoEngine: engine xử lý tiếng Việt do Nguyễn Hà Dương (cmpitg@gmail.com) viết. Engine này được viết bằng C đồng thời cung cấp các phương thức để gọi các hàm của engine từ nhiều ngôn ngữ C, Python, Vala&#8230; Engine này hiện này vẫn được tiếp túc phát triển.</li>
-
-<li>IBus Engine: engine của IBus, để xử lý các phím nhập vào. Dựa trên các hàm sẵn có của thư viện ibus, engine này xử lý các phím do người dùng nhập và gọi hàm của BoGoEngine để xử lý tiếng Việt, tạo ra các xâu tiếng Việt cho người dùng.</li>
+<li><p><code>__charset_list</code> : Danh sách các bảng mã. Tạm thời IBus BoGoEngine hỗ trợ 2 bảng mã: UTF8 và TCVN3</p></li>
+<li><p><code>__prop_list</code> : Danh sách các thuộc tính. Danh sách này dùng để tạo giao diện người dùng. Tạm thời, người dùng có thể chọn giữa UTF8 và TCVN3</p></li>
+<li><p><code>__charset_prop_menu</code> : Danh sách thuộc tính bảng mã</p></li>
+<li><p><code>is_faking_backspace</code> : Biến boolean, giá trị True nếu đang thực hiện tạo backspace giả. False nếu ngược lại.</p></li>
+<li><p><code>number_fake_backspace</code> : Số lượng backspace giả cần tạo. Giá trị này được tính bằng cách gọi hàm <code>get_nbackspace_and_string_to_commit(self)</code></p></li>
 </ul>
 
-<p>Tài liệu phát triển của IBus BoGoEngine được ghi trong file API.html đi kèm với mã nguồn của phần mềm.</p>
-
-<h2 id='3_cc_yu_cu_v_bin_dch_v_pht_trin'>3. Các yêu cầu về biên dịch và phát triển:</h2>
+<h3>Methods:</h3>
 
 <ul>
-<li>cmake: Công cụ tạo Makefiles (cmake &gt;= 2.6)</li>
+<li><p><code>__init__(self)</code> : Khởi tạo engine</p></li>
+<li><p><code>__init_charset_prop_menu(self)</code> : Khởi tạo danh sách thuộc tính bảng mã</p></li>
+<li><p><code>__init_props(self)</code> : Khởi tạo danh sách thuộc tính</p></li>
+<li><p><code>reset_engine(self)</code> : Khởi tạo lại các giá trị ban đầu của engine</p></li>
+<li><p><code>do_process_key_event(self, keyval, keycode, state)</code>: Xử lý phím được nhập vào từ người dùng.</p>
 
-<li>gcc: trình biên dịch C/C++ của GNU (gcc)</li>
-
-<li>Thư viện gtkmm dành cho nhà phát triển (libgtkmm-dev &gt;= 2.4)</li>
-
-<li>Thư viện ibus dành cho nhà phát triển (libibus-1.0-dev, libibus-qt-dev, python-ibus)</li>
-
-<li>python: trình biên dịch python (python-2.7.3)</li>
+<ul>
+<li><p>Tham số: </p></li>
+<li><p><em>keyval</em>: giá trị của phím. Được định nghĩa trong tài liệu của IBus</p></li>
+<li><em>keycode</em>: mã của phím </li>
+<li><p><em>state</em>: có giữ các phím control, shift,... hay không</p></li>
+<li><p>Giá trị trả lại: <code>True</code> nếu muốn việc xử lý chỉ dừng lại ở engine. <code>False</code> 
+nếu muốn phím gõ vào được xử lý bởi hệ thống (x-server)</p></li>
 </ul>
 
-<p><em>Lưu ý</em>:</p>
-
-<p>- Tên thư viện có thể khác nhau tùy theo bản phân phối linux. - Nên sử dụng các bản phân phối linux mới nhất.</p>
-
-<h2 id='4_cc_yu_cu_v_vic_s_dng'>4. Các yêu cầu về việc sử dụng:</h2>
-
-<p>- ibus</p>
-
-<p>- ibus-qt</p>
-
-<h2 id='5_hng_dn_thit_lp_mi_trng_s_dng_v_pht_trin'>5. Hướng dẫn thiết lập môi trường sử dụng và phát triển:</h2>
-
-<p>Sau khi cài đặt các gói trên, thêm các dòng sau vào file $HOME/.profile:</p>
-
-<pre><code>export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=xim</code></pre>
-
-<h2 id='bin_dch_bogoengine'>Biên dịch BoGoEngine:</h2>
-
-<p>Tải mã nguồn của phần mềm về, giải nén ra thư mục BoGoEngine. Việc biên dịch yêu cầu cái trước các thư viện và công cụ được đề cập ở trên.</p>
-
-<h3 id='bin_dch_bogoengine'>Biên dịch BoGoEngine:</h3>
-
-<p>Tại thư mục BoGoEngine thực hiện lệnh sau:</p>
-
-<pre><code>cd bogo
-mkdir build
-cd build
-cmake ..
-make
-sudo make install</code></pre>
-
-<h3 id='bin_dch_engine_cho_ibus'>Biên dịch engine cho IBus:</h3>
-
-<p>Tại thư mục BoGoEngine thực hiện lệnh sau:</p>
-
-<pre><code>cd ibus-bogo-python/
-mkdir build
-cd build
-cmake ..
-make
-sudo make install</code></pre>
-
-<h3 id='chy_ibus_bogoengine__test_hoc_s_dng_lun'>Chạy IBus BoGoEngine để test hoặc sử dụng luôn:</h3>
-
-<p>Tại thư mục BoGoEngine thực hiện lệnh sau:</p>
-
-<pre><code>ibus-daemon -xdr
-python ibus-bogo-python/engine/BoGoMain.py</code></pre>
-</body></html>
+<p><p>Hàm này được gọi bởi IBus mỗi khi có sự kiện phím bấm từ người dùng.</p></li>
+<li><p><code>commit_utf8(self, string)</code>: Gửi tới client xâu UTF8 <code>string</code></p></li>
+<li><p><code>commit_tcvn3(self, string)</code>: Gửi tới client xâu TCVN3 <code>string</code></p></li>
+<li><p><code>commit_result(self, string)</code>: Gửi tới client xâu <code>string</code>. Hàm này được gán là
+một trong hai hàm <code>commit_utf8(self, string)</code> hoặc <code>commit_tcvn3(self, string)</code>
+tuỳ thuộc vào thuộc tính bảng mã được chọn.</p></li>
+<li><p><code>get_nbackspace_and_string_to_commit(self):</code> Trả về hai giá trị: Giá trị 
+đầu tiên là số backspace giả cần tạo. Giá trị thứ hai là xâu sau khi được xử lý tiếng Việt.</p></li>
+<li><p><code>is_character(self, keyval)</code>: Kiểm tra xem phím gõ vào có phải là ký tự không.</p></li>
+<li><p><code>do_focus_in(self)</code>: Các thao tác khi client được chọn</p></li>
+<li><p><code>do_focus_out(self)</code>: Các thao tác khi chuyển từ client được chọn ra chỗ khác</p></li>
+<li><p><code>do_property_activate(self, prop_name, state)</code>: Thay đổi thuộc tính của engine trong <code>__prop_list</code></p></li>
+<li><p><code>forward_key_event(keysym, keycode, state)</code>: Hàm của IBus.Engine. Tạo 1 key 
+event giả với keycode, keysym, state như định nghĩa trong <code>do_process_key_event</code></p></li>
+</ul></p>

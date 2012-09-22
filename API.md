@@ -15,9 +15,9 @@ Dưới đây là các phương thức và thuộc tính của class Engine tron
 
 *engine*: engine xử lý kí tự của IBus
 
-*BoGoEngine*: engine xử lý tiếng Việt được xử dụng. Engine này được viết bằng C và cung cấp các hàm để gọi từ Python.
+*BoGoEngine*: engine xử lý tiếng Việt được sử dụng. Engine này được viết bằng C++ và cung cấp các hàm để gọi từ Python.
 
-## class Engine(IBus.Engine) ##
+## Class Engine(IBus.Engine) ##
 
 ### Instance Variables: ###
 
@@ -29,7 +29,7 @@ Dưới đây là các phương thức và thuộc tính của class Engine tron
 
 - `is_faking_backspace` : Biến boolean, giá trị True nếu đang thực hiện tạo backspace giả. False nếu ngược lại.
 
-- `number_fake_backspace` : Số lượng backspace giả cần tạo. Giá trị này được tính bằng cách gọi hàm `get_nbackspace_and_string_to_commit(self):`
+- `number_fake_backspace` : Số lượng backspace giả cần tạo. Giá trị này được tính bằng cách gọi hàm `get_nbackspace_and_string_to_commit(self)`
 
 ### Methods: ###
 
@@ -39,7 +39,7 @@ Dưới đây là các phương thức và thuộc tính của class Engine tron
       
 * `__init_props(self)` : Khởi tạo danh sách thuộc tính
 
-* `reset_engine(self)` : Reset engine
+* `reset_engine(self)` : Khởi tạo lại các giá trị ban đầu của engine
 
 * `do_process_key_event(self, keyval, keycode, state)`: Xử lý phím được nhập vào từ người dùng.
 
@@ -49,16 +49,21 @@ Dưới đây là các phương thức và thuộc tính của class Engine tron
     * _keycode_: mã của phím 
     * _state_: có giữ các phím control, shift,... hay không
 
-  * Giá trị trả lại: `True` nếu muốn việc xử lý chỉ dừng lại ở engine. `False` nếu muốn phím gõ vào được xử lý bởi hệ thống (x-server)
+  * Giá trị trả lại: `True` nếu muốn việc xử lý chỉ dừng lại ở engine. `False` 
+    nếu muốn phím gõ vào được xử lý bởi hệ thống (x-server)
 
-* `commit_utf8(self, string)`: In ra client xâu UTF8 `string`
+    Hàm này được gọi bởi IBus mỗi khi có sự kiện phím bấm từ người dùng.
+
+* `commit_utf8(self, string)`: Gửi tới client xâu UTF8 `string`
  
-* `commit_tcvn3(self, string)`: In ra client xâu TCVN3 `string`
+* `commit_tcvn3(self, string)`: Gửi tới client xâu TCVN3 `string`
 
-* `commit_result(self, string)`: In ra client xâu `string`. Hàm này được gán là một trong hai hàm `commit_utf8(self, string)` hoặc `commit_tcvn3(self, string)`
-tuỳ thuộc vào thuộc tính bảng mã được chọn.
+* `commit_result(self, string)`: Gửi tới client xâu `string`. Hàm này được gán là
+    một trong hai hàm `commit_utf8(self, string)` hoặc `commit_tcvn3(self, string)`
+    tuỳ thuộc vào thuộc tính bảng mã được chọn.
   
-* `get_nbackspace_and_string_to_commit(self):` Trả về hai giá trị: Giá trị đầu tiên là số backspace giả cần tạo. Giá trị thứ hai là xâu sau khi được xử lý tiếng Việt.
+* `get_nbackspace_and_string_to_commit(self):` Trả về hai giá trị: Giá trị 
+    đầu tiên là số backspace giả cần tạo. Giá trị thứ hai là xâu sau khi được xử lý tiếng Việt.
 
 * `is_character(self, keyval)`: Kiểm tra xem phím gõ vào có phải là ký tự không.
 
@@ -68,4 +73,5 @@ tuỳ thuộc vào thuộc tính bảng mã được chọn.
     
 * `do_property_activate(self, prop_name, state)`: Thay đổi thuộc tính của engine trong `__prop_list`
      
-* `forward_key_event(keysym, keycode, state)`: Tạo 1 key event giả với keycode, keysym, state như định nghịa trong `do_process_key_event`
+* `forward_key_event(keysym, keycode, state)`: Hàm của IBus.Engine. Tạo 1 key 
+    event giả với keycode, keysym, state như định nghĩa trong `do_process_key_event`

@@ -2,34 +2,48 @@
 
 ## 1. Hoàn cảnh ra đời dự án: ##
 
-Trong hoàn cảnh phần mềm tự do nguồn mở (FOSS) đang phát triển mạnh và tạo nên những giá trị mới về kinh tế, an ninh và giáo dục của Việt Nam, 
-việc có một bộ gõ tiếng Việt hoàn chỉnh và tuân theo các tiêu chuẩn và triết lý của FOSS là vô cùng cần thiết. Phần mềm ibus-unikey của tác giả
- Lê Quốc Tuấn (mr.lequoctuan@gmail.com) và Lê Kiến Trúc (afterlastangel@ubuntu-vn.org) đã đáp ứng khá tốt về tính năng sử dụng của người dùng FOSS Việt.
- Tuy vậy phần mềm này gặp phải một số vấn đề về kĩ thuật cũng như triết lý phần mềm tự do nguồn mở:
+Trong hoàn cảnh phần mềm tự do nguồn mở (FOSS) đang phát triển mạnh và tạo nên 
+những giá trị mới về kinh tế, an ninh và giáo dục của Việt Nam. Việc có một 
+bộ gõ tiếng Việt hoàn chỉnh và tuân theo các tiêu chuẩn và triết lý của FOSS
+là vô cùng cần thiết. Phần mềm ibus-unikey của tác giả Lê Quốc Tuấn (mr.lequoctuan@gmail.com)
+và Lê Kiến Trúc (afterlastangel@ubuntu-vn.org) đã đáp ứng khá tốt về tính năng
+sử dụng của người dùng FOSS Việt. Tuy vậy phần mềm này gặp phải một số vấn đề 
+về kỹ thuật cũng như triết lý phần mềm tự do nguồn mở:
  
- * Sử dụng kĩ thuật preeedit gây ra các phiền phức cho người dùng như: xuất hiện gạch chân khi gõ tiếng Việt, hiển thị kí tự khi gõ mật khẩu khi gõ ở terminal
+ * Sử dụng kỹ thuật preeedit gây ra các phiền phức cho người dùng như: xuất hiện
+ gạch chân khi gõ tiếng Việt, hiển thị kí tự khi gõ mật khẩu khi gõ ở terminal
  và đặc biệt nhảy kí tự cần gõ khi di duyển giữa các cửa sổ đang sử dụng ibus-unikey
  
- * Mã nguồn không được có quy tắc (convention), chú thích, không có tài liệu (documentation) cho người phát triển. Đây là một điều rất xấu trong cộng đồng FOSS, 
+ * Mã nguồn không được có quy tắc (convention), chú thích, không có tài liệu 
+ (documentation) cho người phát triển. Đây là một điều rất xấu trong cộng đồng FOSS, 
  khi mà sự kế thừa và và phát triển được đề cao và được xem là sự sống còn cho phần mềm.
  
-IBus BoGoEngine được tạo ra để khắc phục các nhược điểm trên. Việc khắc phục lỗi preeedit string được coi là tính năng đáng chú ý của IBus BoGoEngine.
-Ngoài ra, nhóm phát triển còn muốn tạo ra một phần mềm theo đúng tinh thần FOSS bằng cách cung cấp documentation, viết code cẩn thận, có quy tắc và chú thích, 
-phân phối dưới giấy phép GNU GPL version 3. Nhóm phát triển hi vọng rằng, phần mềm này luôn được hoàn thiện.
+IBus BoGoEngine được tạo ra để khắc phục các nhược điểm trên. Việc khắc phục lỗi
+preeedit string được coi là tính năng đáng chú ý của IBus BoGoEngine.
+Ngoài ra, nhóm phát triển còn muốn tạo ra một phần mềm theo đúng tinh thần FOSS
+bằng cách cung cấp documentation, viết code cẩn thận, có quy tắc và chú thích, 
+phân phối dưới giấy phép GNU GPL version 3. 
+
+Nhóm phát triển hi vọng rằng phần mềm này sẽ được cộng đồng đón nhận và tiếp tục hoàn thiện.
  
 ## 2. Thiết kế của IBus BoGoEngine: ##
  
 IBus BoGoEngine gồm 2 thành phần:
  
- - BoGoEngine: engine xử lý tiếng Việt do Nguyễn Hà Dương (cmpitg@gmail.com) viết. Engine này được viết bằng C đồng thời cung cấp các phương thức để gọi 
- các hàm của engine từ nhiều ngôn ngữ C, Python, Vala... Engine này hiện này vẫn được tiếp túc phát triển.
- - IBus Engine: engine của IBus, để xử lý các phím nhập vào. Dựa trên các hàm sẵn có của thư viện ibus, engine này xử lý các phím do người dùng nhập 
- và gọi hàm của BoGoEngine để xử lý tiếng Việt, tạo ra các xâu tiếng Việt cho người dùng.
+ - BoGoEngine: engine lõi xử lý tiếng Việt do Nguyễn Hà Dương (cmpitg@gmail.com)
+viết. Engine này được viết bằng C++ đồng thời cung cấp các phương thức để gọi 
+các hàm của engine từ nhiều ngôn ngữ C, Python, Vala... Engine này hiện nay vẫn
+được tiếp tục phát triển.
+ - IBus Engine: engine giao tiếp trực tiếp với IBus để xử lý các phím nhập vào.
+Dựa trên các hàm sẵn có của thư viện IBus, engine này xử lý các phím do người dùng
+nhập và gọi hàm của BoGoEngine để xử lý tiếng Việt, tạo ra các xâu tiếng Việt cho người dùng.
 
-Tài liệu phát triển của IBus BoGoEngine được ghi trong file API.html đi kèm với mã nguồn của phần mềm.
+Tài liệu phát triển của IBus BoGoEngine được ghi trong file API.html đi kèm với 
+mã nguồn của phần mềm.
    
-## 3. Các yêu cầu về biên dịch và phát triển: ##
+## 3. Biên dịch: ##
 
+### Các yêu cầu khi biên dịch ###
  - cmake: Công cụ tạo Makefiles (cmake >= 2.6)
  - gcc: trình biên dịch C/C++ của GNU (gcc)
  - Thư viện gtkmm dành cho nhà phát triển (libgtkmm-dev >= 2.4)
@@ -37,32 +51,38 @@ Tài liệu phát triển của IBus BoGoEngine được ghi trong file API.html
  - python: trình biên dịch python (python-2.7.3)
  - gir1.2-ibus
  
- _Lưu ý_:
+_Lưu ý_:
  
-  - Tên thư viện có thể khác nhau tùy theo bản phân phối linux.
-  - Nên sử dụng các bản phân phối linux mới nhất.
-  
-## 4. Các yêu cầu về việc sử dụng: ##
-  
-  - ibus
-  
-  - ibus-qt
-  
-## 5. Hướng dẫn thiết lập môi trường sử dụng và phát triển: ##
+- Tên thư viện có thể khác nhau tùy theo bản phân phối Linux.
+- Nên sử dụng các bản phân phối Linux mới nhất.
 
-Sau khi cài đặt các gói trên, thêm các dòng sau vào file $HOME/.profile:
+Với Ubuntu/Debian thì có thể sử dụng lệnh sau để tải tất cả các gói cần cho việc build:
+
+    sudo apt-get install build-essential cmake libgtkmm-2.4-dev
+
+Cho việc sử dụng:
+
+    sudo apt-get install gir1.2-ibus-1.0 python-xlib
+  
+Sau khi cài đặt các gói trên, thêm các dòng sau vào file $HOME/.profile và logout, login
+để cập nhật thay đổi:
 
     export GTK_IM_MODULE=ibus
     export XMODIFIERS=@im=ibus
     export QT_IM_MODULE=xim
 
-## Biên dịch BoGoEngine: ##
+### Hướng dẫn biên dịch ###
 
-Tải mã nguồn của phần mềm về, giải nén ra thư mục BoGoEngine. Việc biên dịch yêu cầu cái trước các thư viện và công cụ được đề cập ở trên.
+Tải mã nguồn mới nhất về sử dụng các lệnh sau (cần có phần mềm git):
 
-### Biên dịch BoGoEngine: ###
+    mkdir BoGoEngine
+    cd BoGoEngine
+    git clone https://github.com/BoGoEngine/bogo.git
+    git clone https://github.com/BoGoEngine/ibus-bogo-python.git
 
-  Tại thư mục BoGoEngine thực hiện lệnh sau:
+#### Biên dịch BoGoEngine: ####
+
+Tại thư mục BoGoEngine, thực hiện lệnh sau:
 
     cd bogo
     mkdir build
@@ -70,10 +90,16 @@ Tải mã nguồn của phần mềm về, giải nén ra thư mục BoGoEngine.
     cmake ..
     make
     sudo make install
+    sudo ldconfig
 
-### Biên dịch engine cho IBus: ###
+Để gỡ cài đặt:
+    
+    cd bogo/build
+    sudo make uninstall
+
+#### Biên dịch engine cho IBus: ####
   
-  Tại thư mục BoGoEngine thực hiện lệnh sau:
+Tại thư mục BoGoEngine, thực hiện lệnh sau:
 
     cd ibus-bogo-python/
     mkdir build
@@ -82,13 +108,31 @@ Tải mã nguồn của phần mềm về, giải nén ra thư mục BoGoEngine.
     make
     sudo make install
 
-### Chạy IBus BoGoEngine để test hoặc sử dụng luôn: ###
+Sau đó trong trang Tùy thích > Kiểu gõ của IBus sẽ xuất hiện engine "BOGO" trong
+ngôn ngữ Tiếng Việt.
+
+Để gỡ cài đặt:
+    
+    cd ibus-bogo-python/build
+    sudo make uninstall
+
+#### Chạy IBus BoGoEngine để test hoặc sử dụng luôn: ####
   
-  Tại thư mục BoGoEngine thực hiện lệnh sau:
+Tuy nhiên, bạn cũng có thể test nhanh BoGo mà không cần cài đặt gói ibus-bogo-python.
+
+Trước hết cần cài bogo như hướng dẫn ở mục "Biên dịch BoGoEngine".
+Trong một của sổ dòng lệnh bất kỳ, chạy lệnh:
+
+    $ ibus-daemon -xvr
+
+    -x : Xim (đóng giả phương thức nhập liệu của X)
+    -v : verbose (in ra các đoạn debug)
+    -r : replace (thay thế ibus-daemon hiện tại)
+
+Sau đó, tại thư mục BoGoEngine thực hiện lệnh sau:
   
-    ibus-daemon -xdr
     python ibus-bogo-python/engine/BoGoMain.py
 
- 
- 
- 
+Engine "BOGO" sẽ đang là engine được lựa chọn trong IBus và bạn có thể gõ tiếng Việt bằng BoGo.
+Nếu bạn có thể thấy những đoạn debug được in ra trong cửa sổ terminal khi gõ tiếng Việt
+tức là mọi thứ đang chạy tốt.
