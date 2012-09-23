@@ -92,6 +92,11 @@ Tại thư mục BoGoEngine, thực hiện lệnh sau:
     sudo make install
     sudo ldconfig
 
+_Lưu ý_:
+
+Nếu bạn sử dụng các HĐH dòng Fedora/Redhat/Centos thì cần phải thêm dòng "/usr/local/lib"
+vào file /etc/ld.so.conf trước khi chạy ldconfig.
+
 Để gỡ cài đặt:
     
     cd bogo/build
