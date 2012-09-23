@@ -46,7 +46,7 @@ mã nguồn của phần mềm.
 ### Các yêu cầu khi biên dịch ###
  - cmake: Công cụ tạo Makefiles (cmake >= 2.6)
  - gcc: trình biên dịch C/C++ của GNU (gcc)
- - Thư viện gtkmm dành cho nhà phát triển (libgtkmm-dev >= 2.4)
+ - Thư viện glibmm dành cho nhà phát triển (libglibmm-dev >= 2.4)
  - Thư viện ibus dành cho nhà phát triển (libibus-1.0-dev, libibus-qt-dev, python-ibus)
  - python: trình biên dịch python (python-2.7.3)
  - gir1.2-ibus
@@ -58,7 +58,7 @@ _Lưu ý_:
 
 Với Ubuntu/Debian thì có thể sử dụng lệnh sau để tải tất cả các gói cần cho việc build:
 
-    sudo apt-get install build-essential cmake libgtkmm-2.4-dev
+    sudo apt-get install build-essential cmake libglibmm-2.4-dev
 
 Cho việc sử dụng:
 
