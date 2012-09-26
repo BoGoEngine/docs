@@ -43,6 +43,11 @@ mã nguồn của phần mềm.
    
 ## 3. Biên dịch: ##
 
+Người dùng Ubuntu có thể cài đặt BoGo từ ppa:ndtrung4419/bogo mà không cần phải
+làm theo các bước dưới đây.
+
+Người dùng ArchLinux cũng có thể cài BoGo từ kho AUR, package có tên là ibus-bogo.
+
 ### Các yêu cầu khi biên dịch ###
  - cmake: Công cụ tạo Makefiles (cmake >= 2.6)
  - gcc: trình biên dịch C/C++ của GNU (gcc)
