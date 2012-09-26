@@ -71,6 +71,9 @@ Sau khi cài đặt các gói trên, thêm các dòng sau vào file $HOME/.profi
     export XMODIFIERS=@im=ibus
     export QT_IM_MODULE=xim
 
+Nếu bạn bị lỗi khi gõ trong các ứng dụng Qt kiểu "haf" => "haà" thì hãy thử gỡ
+cài đặt gói ibus-qt4.
+
 ### Hướng dẫn biên dịch ###
 
 Tải mã nguồn mới nhất về sử dụng các lệnh sau (cần có phần mềm git):
