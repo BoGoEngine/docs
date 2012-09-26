@@ -43,10 +43,15 @@ mã nguồn của phần mềm.
    
 ## 3. Biên dịch: ##
 
-Người dùng Ubuntu có thể cài đặt BoGo từ ppa:ndtrung4419/bogo mà không cần phải
-làm theo các bước dưới đây.
+__Cài từ kho__
 
-Người dùng ArchLinux cũng có thể cài BoGo từ kho AUR, package có tên là ibus-bogo.
+ - Người dùng Ubuntu có thể cài đặt gói `ibus-bogo` từ `ppa:ndtrung4419/bogo` mà không
+cần biên dịch.
+
+        sudo add-apt-repository ppa:ndtrung4419/bogo
+        sudo apt-get update && sudo apt-get install ibus-bogo
+
+ - Người dùng ArchLinux cũng có thể cài BoGo từ kho [AUR](http://aur.archlinux.org/packages.php?ID=63162).
 
 ### Các yêu cầu khi biên dịch ###
  - cmake: Công cụ tạo Makefiles (cmake >= 2.6)
